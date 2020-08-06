@@ -116,7 +116,7 @@ const Home = () => {
         fetchFiles().then(data => setFileList(data));
 
         if (token === undefined || token === null) {
-            let dbx = new Dropbox.Dropbox({ clientId: Config.DBX_CLIENT_ID });
+            let dbx = new Dropbox.Dropbox({ clientId: Config.DBX_CLIENT_ID, fetch: fetch });
             let authURL = dbx.getAuthenticationUrl(Config.DBX_CLIENT_REDIRECT);
             setAuthURL(authURL);
         } else {
