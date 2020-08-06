@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState } from "react";
 import {
   BrowserRouter as Router,
   Switch,
@@ -10,8 +10,6 @@ import {
 } from "react-router-dom";
 
 import CryptoJS from 'crypto-js';
-import Base64 from 'crypto-js/enc-base64';
-import Utf8 from 'crypto-js/enc-utf8';
 import Dropbox from 'dropbox';
 
 import {UnControlled as CodeMirror} from 'react-codemirror2';
@@ -134,7 +132,7 @@ const Home = () => {
             });
         }
 
-    }, []);
+    }, [token]);
     
     return (
         <>
@@ -162,8 +160,8 @@ function About() {
 }
 
 function DropboxAuth() {
-    let match = useRouteMatch();
-    let params = useParams();
+    //let match = useRouteMatch();
+    //let params = useParams();
 
     const [token, setToken] = useState<string | undefined>(undefined);
 
@@ -263,7 +261,7 @@ function DropboxFileEdit() {
             .catch((err) => {
                 console.log(err);
             });
-    }, []);
+    }, [dbxPath]);
 
     return (
         <>
@@ -322,7 +320,7 @@ function Topic() {
                 let decrypted = CryptoJS.AES.decrypt(text, localStorage.getItem("password")!);
                 setContent(decrypted.toString(CryptoJS.enc.Utf8));
             });
-    }, []);
+    }, [topicId]);
 
     return (
         <>
