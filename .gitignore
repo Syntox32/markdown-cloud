@@ -118,3 +118,4 @@ dist
 # Wrangler
 wrangler.toml
 workers-site/
+build/
