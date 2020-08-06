@@ -19,6 +19,8 @@ import 'codemirror/mode/markdown/markdown.js';
 
 import './Home.scss';
 
+import { Config } from './config';
+
 export default function AppRoutes() {
   return (
     <Router>
@@ -84,7 +86,6 @@ function parseQueryString(str: string) {
 
 
 const API = "http://localhost:5000";
-const DBX_CLIENT_ID = "7xzo3xrgkbbkvzi";
 
 const fetchFiles = () => {
   return fetch(API + "/list").then(resp => resp.json());
@@ -115,8 +116,8 @@ const Home = () => {
         fetchFiles().then(data => setFileList(data));
 
         if (token === undefined || token === null) {
-            let dbx = new Dropbox.Dropbox({ clientId: DBX_CLIENT_ID });
-            let authURL = dbx.getAuthenticationUrl("http://localhost:3000/dropbox");
+            let dbx = new Dropbox.Dropbox({ clientId: Config.DBX_CLIENT_ID });
+            let authURL = dbx.getAuthenticationUrl(Config.DBX_CLIENT_REDIRECT);
             setAuthURL(authURL);
         } else {
             let dbx = new Dropbox.Dropbox({accessToken: token});
