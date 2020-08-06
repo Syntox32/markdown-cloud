@@ -116,6 +116,5 @@ dist
 .pnp.*
 
 # Wrangler
-wrangler.toml
-workers-site/
+workers-site/node_modules
 build/
