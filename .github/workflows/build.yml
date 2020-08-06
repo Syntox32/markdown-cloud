@@ -45,10 +45,23 @@ jobs:
   
   deploy:
     runs-on: ubuntu-latest
-    name: Deploy
+    needs: [build]
+    name: deploy
     steps:
       - uses: actions/checkout@v2
-      - name: Publish
+      
+      #- uses: actions/setup-node@v1
+      
+      #- name: Install packages
+      #  run: yarn install
+    
+      #- name: Build
+      #  run: yarn build
+      
+      - name: Publish to worker
         uses: cloudflare/wrangler-action@1.2.0
         with:
           apiToken: ${{ secrets.CF_API_TOKEN }}
+        env:
+          CF_ACCOUNT_ID: ${{ secrets.CF_ACCOUNT_ID }}
+          CF_ZONE_ID: ${{ secrets.CF_ZONE_ID }}
