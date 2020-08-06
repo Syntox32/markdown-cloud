@@ -39,6 +39,9 @@ jobs:
     
     - name: Run tests
       run: yarn test
+      env:
+          REACT_APP_DBX_CLIENT_ID: ${{ secrets.REACT_APP_DBX_CLIENT_ID }}
+          REACT_APP_DBX_REDIRECT_URL: ${{ secrets.REACT_APP_DBX_REDIRECT_URL }}
     
     - name: Build
       run: yarn build
