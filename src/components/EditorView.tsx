@@ -5,6 +5,7 @@ from "react";
 
 import {
   useParams,
+  Link,
 } from "react-router-dom";
 
 import { Editor } from '../components/Editor';
@@ -14,17 +15,6 @@ import {
 	decrypt,
 	getPassword
 } from '../utils/Encryption';
-
-import { 
-	createMuiTheme, 
-	ThemeProvider, 
-	makeStyles, 
-	createStyles 
-} from '@material-ui/core/styles';
-
-import {
-	Link,
-} from '@material-ui/core';
 
 import { IProvider, IFile, IFileMeta } from "../providers/interfaces";
 
@@ -62,7 +52,7 @@ export const EditorView = (props: IEditorViewProps) => {
 
 	return (
 		<>
-			<Link href="/">Back</Link>
+			<Link to="/">Back</Link>
 			<h3>{filename}</h3>
 			<Editor 
 				content={textContent}
