@@ -48,21 +48,7 @@ export const EditorView = (props: IEditorViewProps) => {
       props.provider.saveFile(filename, value)
         .then(success => console.log(success))
         .catch(err => console.log(err));
-      /*
-			let encrypted = encrypt(value, getPassword());
-			console.log(encrypted.toString());
-			console.log("executing save from timer");
-			fetch(API_URL + "/save/" + filename, {
-				method: "POST",
-				mode: "cors",
-				headers: {
-					"Content-Type": "text",
-				},
-				redirect: "follow",
-				body: encrypted.toString() + "\n",
-			}).then(resp => console.log(resp.status))
-      .catch(err => console.log(err));
-      */
+   
 		}, 1000));   
 	}
 
@@ -71,14 +57,7 @@ export const EditorView = (props: IEditorViewProps) => {
     props.provider.getFile(filename)
       .then((file: IFile) => setContent(file.content))
       .catch(err => console.log(err));
-    /*
-		fetch(API_URL + "/get/" + filename)
-			.then(resp => resp.text())
-			.then(text => {
-				let decrypted = decrypt(text, getPassword());
-				setContent(decrypted);
-      });
-      */
+ 
 	}, [filename]);
 
 	return (
