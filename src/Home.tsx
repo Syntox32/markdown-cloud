@@ -12,6 +12,8 @@ import {
 import CryptoJS from 'crypto-js';
 import Dropbox from 'dropbox';
 
+import 'normalize.css';
+
 import {UnControlled as CodeMirror} from 'react-codemirror2';
 import 'codemirror/lib/codemirror.css';
 import 'codemirror/theme/material.css';
@@ -112,6 +114,11 @@ const Home = () => {
 
     const [dropboxFiles, setDropboxFiles] = useState<any>(undefined);
 
+    const isAuthenticated = () => (token !== undefined && token !== null);
+
+    const useCustomProvider = () => true;
+    const useDropboxProvder = () => true;
+
     useEffect(() => {
         fetchFiles().then(data => setFileList(data));
 
@@ -134,24 +141,41 @@ const Home = () => {
         }
 
     }, [token]);
-    
-    return (
-        <>
-            {(token === undefined || token === null) ? <a href={authURL}>Authenticate with Dropbox</a> : <p>Logged into dropbox</p>}
-            
+
+    const dropboxLogout = () => {
+        localStorage.removeItem("accessToken");
+        window.location.reload();
+    }
+
+    const providerDropbox = () => {
+        return (<>
             <p>dropbox entries</p>
+            {isAuthenticated() && <p onClick={dropboxLogout}>Click here to log out</p>}
             <ul>
                 {dropboxFiles?.map((entry: any) => (
                     <li className="file"><Link to={'/d' + entry.path_lower}>{entry.path_display}</Link></li>
                 ))}
             </ul>
+        </>);
+    }
+
+    const providerCustom = () => {
+        return (<>
             <p>server entries</p>
             <ul className="file-list">
                 {fileList.map((fileName) => (
                     <li className="file"><Link to={'/e/' + fileName}>{fileName}</Link></li>
                 ))}
             </ul>
+        </>);
+    }
+    
+    return (
+        <>
+            {(useDropboxProvder() && !isAuthenticated()) ? <a href={authURL}>Authenticate with Dropbox</a> : (<p>Logged into dropbox</p>)}
 
+            {useDropboxProvder() && providerDropbox()}
+            {useCustomProvider() && providerCustom()}
         </>
     );
 }
