@@ -32,7 +32,7 @@ export const DropboxCard = () => {
 			});
 		}
 
-	}, [token]);
+	}, [token, dropbox]);
 
   return (
     <>
