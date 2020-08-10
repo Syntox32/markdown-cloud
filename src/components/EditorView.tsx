@@ -2,31 +2,20 @@ import React, {
 	useEffect, 
 	useState } 
 from "react";
-
 import {
   useParams,
+  Link,
 } from "react-router-dom";
 
 import { Editor } from '../components/Editor';
-import { API_URL } from '../utils/CustomAPI';
+import { IProvider, IFile } from "../providers/interfaces";
 import {
-	encrypt,
-	decrypt,
-	getPassword
-} from '../utils/Encryption';
+  EditorContainer,
+  EditorHeader,
+  EditorFilename,
+  EditorLink,
+} from '../utils/Styles';
 
-import { 
-	createMuiTheme, 
-	ThemeProvider, 
-	makeStyles, 
-	createStyles 
-} from '@material-ui/core/styles';
-
-import {
-	Link,
-} from '@material-ui/core';
-
-import { IProvider, IFile, IFileMeta } from "../providers/interfaces";
 
 interface IEditorViewProps {
   provider: IProvider;
@@ -48,21 +37,7 @@ export const EditorView = (props: IEditorViewProps) => {
       props.provider.saveFile(filename, value)
         .then(success => console.log(success))
         .catch(err => console.log(err));
-      /*
-			let encrypted = encrypt(value, getPassword());
-			console.log(encrypted.toString());
-			console.log("executing save from timer");
-			fetch(API_URL + "/save/" + filename, {
-				method: "POST",
-				mode: "cors",
-				headers: {
-					"Content-Type": "text",
-				},
-				redirect: "follow",
-				body: encrypted.toString() + "\n",
-			}).then(resp => console.log(resp.status))
-      .catch(err => console.log(err));
-      */
+   
 		}, 1000));   
 	}
 
@@ -71,25 +46,24 @@ export const EditorView = (props: IEditorViewProps) => {
     props.provider.getFile(filename)
       .then((file: IFile) => setContent(file.content))
       .catch(err => console.log(err));
-    /*
-		fetch(API_URL + "/get/" + filename)
-			.then(resp => resp.text())
-			.then(text => {
-				let decrypted = decrypt(text, getPassword());
-				setContent(decrypted);
-      });
-      */
-	}, [filename]);
+ 
+	}, [filename, props.provider]);
 
 	return (
 		<>
-			<Link href="/">Back</Link>
-			<h3>{filename}</h3>
-			<Editor 
-				content={textContent}
-				saveFile={(editor, data, value) => 
-					saveFile(editor, data, value)}
-			/>
+      <EditorContainer>
+        <EditorHeader>
+          <EditorLink>
+            <Link to="/">&lt; back</Link>
+          </EditorLink>
+          <EditorFilename>filename: /{filename}</EditorFilename>
+        </EditorHeader>
+        <Editor 
+          content={textContent}
+          saveFile={(editor, data, value) => 
+            saveFile(editor, data, value)}
+        />
+      </EditorContainer>
 		</>
 	);
 }

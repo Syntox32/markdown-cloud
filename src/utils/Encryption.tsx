@@ -4,7 +4,7 @@ export const getPassword = (): string => {
   let pass = localStorage.getItem("password");
 		console.log(pass);
 		if (pass === null) {
-			let promptedPass = prompt("Please enter the encryption password", '*');
+			let promptedPass = prompt("Please enter the encryption password", '');
 			if (promptedPass !== null) {
 				localStorage.setItem("password", promptedPass!);
 			}
