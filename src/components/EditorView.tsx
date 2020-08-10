@@ -2,21 +2,20 @@ import React, {
 	useEffect, 
 	useState } 
 from "react";
-
 import {
   useParams,
   Link,
 } from "react-router-dom";
 
 import { Editor } from '../components/Editor';
-import { API_URL } from '../utils/CustomAPI';
+import { IProvider, IFile } from "../providers/interfaces";
 import {
-	encrypt,
-	decrypt,
-	getPassword
-} from '../utils/Encryption';
+  EditorContainer,
+  EditorHeader,
+  EditorFilename,
+  EditorLink,
+} from '../utils/Styles';
 
-import { IProvider, IFile, IFileMeta } from "../providers/interfaces";
 
 interface IEditorViewProps {
   provider: IProvider;
@@ -48,17 +47,23 @@ export const EditorView = (props: IEditorViewProps) => {
       .then((file: IFile) => setContent(file.content))
       .catch(err => console.log(err));
  
-	}, [filename]);
+	}, [filename, props.provider]);
 
 	return (
 		<>
-			<Link to="/">Back</Link>
-			<h3>{filename}</h3>
-			<Editor 
-				content={textContent}
-				saveFile={(editor, data, value) => 
-					saveFile(editor, data, value)}
-			/>
+      <EditorContainer>
+        <EditorHeader>
+          <EditorLink>
+            <Link to="/">&lt; back</Link>
+          </EditorLink>
+          <EditorFilename>filename: /{filename}</EditorFilename>
+        </EditorHeader>
+        <Editor 
+          content={textContent}
+          saveFile={(editor, data, value) => 
+            saveFile(editor, data, value)}
+        />
+      </EditorContainer>
 		</>
 	);
 }
