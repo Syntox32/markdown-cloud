@@ -10,7 +10,7 @@ import {
 
 import './Home.scss';
 
-import { DropboxCard } from './components/DropboxCard';
+import { DropboxView } from './components/DropboxView';
 import { DropboxRouter } from './components/DropboxRouter';
 
 import {
@@ -18,27 +18,28 @@ import {
 	Container, 
 	EditorContainer,
   EditorHeader,
-  EditorFilename,
+	EditorFilename,
+	EditorContent,
 } from './utils/Styles';
 
 
 export default function AppRoutes() {
 
   return (
-		<Backdrop>
-			<Container>
-				<Router>
-					<Switch>
-						<Route path="/d">
-							<DropboxRouter />
-						</Route>
-						<Route path="/">
-							<Home />
-						</Route>
-					</Switch>
-				</Router>
-			</Container>
-		</Backdrop>
+	<Backdrop>
+		<Container>
+			<Router>
+				<Switch>
+					<Route path="/d">
+						<DropboxRouter />
+					</Route>
+					<Route path="/">
+						<Home />
+					</Route>
+				</Switch>
+			</Router>
+		</Container>
+	</Backdrop>
   );
 }
 
@@ -65,7 +66,9 @@ const Home = () => {
         <EditorHeader>
           <EditorFilename>markdown.cloud</EditorFilename>
         </EditorHeader>
-				{useDropboxProvder() && <DropboxCard />}
+				<EditorContent>
+					{useDropboxProvder() && <DropboxView />}
+				</EditorContent>
       </EditorContainer>
 		</>
 	);
