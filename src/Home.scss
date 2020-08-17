@@ -21,7 +21,34 @@ code {
 
 
 .CodeMirror {
-    height: 100% !important;
-    font-size: 12pt;
-    padding: 7px 0;
+    
+}
+
+.CodeMirror img {
+    width: 100%;
+}
+
+.spinner {
+    background-color: rgb(223, 52, 52);
+    width: 60px;
+    height: 60px;
+
+    animation-name: spin;
+    animation-duration: 2500ms;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out; 
+}
+
+.spin-thing {
+    width: 0px;
+    height: 0px;
+}
+
+@keyframes spin {
+    from {
+        transform:rotate(0deg);
+    }
+    to {
+        transform:rotate(180deg);
+    }
 }
