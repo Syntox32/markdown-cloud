@@ -14,4 +14,6 @@ export interface IProvider {
   getFiles: () => IFileMeta[];
   getFile: (filename: string) => Promise<IFile>;
   saveFile: (filename: string, content: string) => Promise<boolean>;
+  createFile: (filename: string) => Promise<any>;
+  deleteFile: (filename: string) => Promise<any>;
 }

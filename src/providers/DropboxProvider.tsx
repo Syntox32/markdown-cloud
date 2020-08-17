@@ -41,7 +41,23 @@ export class DropboxProvider implements IProvider {
   public getFiles = (): IFileMeta[] => {
     return [];
 	}
-	
+
+	public createFile = (filename: string): Promise<any> => {
+			let encrypted = encrypt("New file!", getPassword());
+			console.log(encrypted);
+
+			let dbx = createDropbox(this.getToken());
+			return dbx.filesUpload({ 
+				path: '/' + filename,
+				contents: new File(
+					[encrypted], 
+					filename,
+					{ type: 'text/plain' }
+				),
+				mode: {".tag": "add"},
+			});
+	}
+
 	public saveFile = (filename: string, content: string): Promise<boolean> => {
 		return new Promise<boolean>((resolve, reject) => {
 			let encrypted = encrypt(content, getPassword());
@@ -95,10 +111,17 @@ export class DropboxProvider implements IProvider {
 				});
 			});
 	}
+
+	public deleteFile = (filename: string): Promise<any> => {
+			let dbx = createDropbox(this.getToken());
+			return dbx.filesDelete({ 
+				path: '/' + filename,
+			});
+	}
 }
 
 
-/**
+/*
 
 let encrypted = encrypt(value, getPassword());
 console.log(encrypted.toString());
@@ -120,5 +143,4 @@ fetch(API_URL + "/get/" + filename)
 		let decrypted = decrypt(text, getPassword());
 		setContent(decrypted);
 	});
-			
- */
+	*/
