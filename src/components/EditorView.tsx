@@ -4,7 +4,7 @@ import React, {
 from "react";
 import {
   useParams,
-  Link,
+  useHistory,
 } from "react-router-dom";
 
 import { Editor } from '../components/Editor';
@@ -13,7 +13,9 @@ import {
   EditorContainer,
   EditorHeader,
   EditorFilename,
-  EditorLink,
+  MenuList,
+  MenuItem,
+  Button,
 } from '../utils/Styles';
 
 
@@ -21,6 +23,7 @@ interface IEditorViewProps {
   provider: IProvider;
 }
 export const EditorView = (props: IEditorViewProps) => {
+  const history = useHistory();
   let { filename } = useParams();
   
 	const [textContent, setContent] = useState("Loading...");
@@ -39,7 +42,21 @@ export const EditorView = (props: IEditorViewProps) => {
         .catch(err => console.log(err));
    
 		}, 1000));   
-	}
+  }
+  
+  const deleteFile = () => {
+    let name = prompt("Type the filename to confirm you wish to delet it", "");
+
+    if (name != null && name !== "") {
+      console.log("deleting file");
+      props.provider.deleteFile(filename)
+        .then(resp => {
+          console.log(resp);
+          history.push("/");
+        })
+      
+    }
+  }
 
 	useEffect(() => {
 		
@@ -51,13 +68,20 @@ export const EditorView = (props: IEditorViewProps) => {
 
 	return (
 		<>
+      <EditorHeader>
+        <MenuList>
+          <MenuItem>
+            <Button onClick={() => history.push("/")}>&lt; back</Button>
+          </MenuItem>
+          <MenuItem>
+            <EditorFilename>filename: /{filename}</EditorFilename>
+          </MenuItem>
+          <MenuItem>
+            <Button onClick={() => deleteFile()}>Delete</Button>
+          </MenuItem>
+        </MenuList>
+      </EditorHeader>
       <EditorContainer>
-        <EditorHeader>
-          <EditorLink>
-            <Link to="/">&lt; back</Link>
-          </EditorLink>
-          <EditorFilename>filename: /{filename}</EditorFilename>
-        </EditorHeader>
         <Editor 
           content={textContent}
           saveFile={(editor, data, value) => 
