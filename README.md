@@ -7,6 +7,7 @@ An attempt at creating the most flexible, secure, and reliable markdown editor h
  - [x] Dropbox Integration
  - [x] Client side encryption with AES
  - [x] Online editor
+ - [x] Inline images
 
 ## Installation
 
