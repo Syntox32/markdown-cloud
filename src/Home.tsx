@@ -1,10 +1,8 @@
-import React, { 
-	 
-} from "react";
+import React, { useEffect } from "react";
 
 import {
-  BrowserRouter as Router,
-  Switch,
+	BrowserRouter as Router,
+	Switch,
 	Route,
 } from "react-router-dom";
 
@@ -17,7 +15,7 @@ import {
 	Backdrop, 
 	Container, 
 	EditorContainer,
-  EditorHeader,
+	EditorHeader,
 	EditorFilename,
 	EditorContent,
 } from './utils/Styles';
@@ -59,17 +57,22 @@ const Home = () => {
 				</ul>
 		</>);
 	}*/
+
+	useEffect(() => {
+		// reset title when going 'back'
+		document.title = "markdown.cloud";
+	}, []);
 	
 	return (
 		<>
 			<EditorContainer>
-        <EditorHeader>
-          <EditorFilename>markdown.cloud</EditorFilename>
-        </EditorHeader>
+				<EditorHeader>
+					<p>markdown.cloud</p>
+				</EditorHeader>
 				<EditorContent>
 					{useDropboxProvder() && <DropboxView />}
 				</EditorContent>
-      </EditorContainer>
+			</EditorContainer>
 		</>
 	);
 }
