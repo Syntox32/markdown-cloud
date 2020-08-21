@@ -16,15 +16,16 @@ export const DropboxRedirectAuth = () => {
 
 	useEffect(() => {
 		let accessToken = parseQueryString(window.location.hash)['access_token'];
-    console.log(accessToken);
-    let dropbox = new DropboxProvider();
-    dropbox.setToken(accessToken);
+
+		let dropbox = new DropboxProvider();
+		dropbox.setToken(accessToken);
+		
 		setToken(accessToken);
 	}, []);
 
 	return (
-		<>
-			{(token !== undefined) ? <Redirect to='/'/> : <p>Redirecting...</p>}
-		</>
+	<>
+		{(token !== undefined) ? <Redirect to='/'/> : <p>Redirecting...</p>}
+	</>
 	);
 }
