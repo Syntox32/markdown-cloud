@@ -1,4 +1,7 @@
-![banner-image](./public/banner.svg)
+
+<p align="center">
+  <img width="400" height="" src="./public/banner.svg">
+</p>
 
 An attempt at creating the most flexible, secure, and reliable markdown editor hosted in the cloud or as your own instance.
 
