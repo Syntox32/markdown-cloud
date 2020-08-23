@@ -1,4 +1,4 @@
-# markdown.cloud
+![banner-image](./public/banner.svg)
 
 An attempt at creating the most flexible, secure, and reliable markdown editor hosted in the cloud or as your own instance.
 
