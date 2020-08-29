@@ -17,3 +17,10 @@ export interface IProvider {
   createFile: (filename: string) => Promise<any>;
   deleteFile: (filename: string) => Promise<any>;
 }
+
+export interface IPlugin {
+  getPluginName: () => string;
+  initialize: (value: string) => void;
+  onChangeEvent: (editor: CodeMirror.Editor, data: CodeMirror.EditorChange, value: string) => void;
+  handleBeforeChange: (editor: CodeMirror.Editor, data: CodeMirror.EditorChange, value: string) => void;
+}
