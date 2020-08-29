@@ -38,8 +38,8 @@ export class DropboxProvider implements IProvider {
 		window.location.reload();
 	}
 		
-  public getFiles = (): IFileMeta[] => {
-    return [];
+  	public getFiles = (): IFileMeta[] => {
+    	return [];
 	}
 
 	public createFile = (filename: string): Promise<any> => {

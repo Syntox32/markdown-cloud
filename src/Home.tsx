@@ -16,7 +16,6 @@ import {
 	Container, 
 	EditorContainer,
 	EditorHeader,
-	EditorFilename,
 	EditorContent,
 } from './utils/Styles';
 

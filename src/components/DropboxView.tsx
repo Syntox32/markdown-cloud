@@ -146,27 +146,25 @@ export const DropboxView = () => {
   }
 
   return (
-    <>
-      <CardContainer>
-        <CardTitle>
-          <p>Dropbox</p>
-        </CardTitle>
-        <CardMenu>
-          { dropbox.isAuthenticated() && menu() }
-          { openCreateMenu && newFileMenu() }
-          { showError && showErrorMenu() }
-        </CardMenu>
-        <CardContent>
-          {!dropbox.isAuthenticated()
-            && <Button as="a" href={authURL}>Authenticate with Dropbox</Button>}
-          { showSpinner && <Spinner></Spinner>}
-          <FileList>
-            {dropboxFiles?.map((entry: any) => (
-              <FileItem as="a" href={'/d' + entry.path_lower}>{entry.path_display}</FileItem>
-            ))}
-          </FileList>
-        </CardContent>
-      </CardContainer>
-    </>
+    <CardContainer>
+      <CardTitle>
+        <p>Dropbox</p>
+      </CardTitle>
+      <CardMenu>
+        { dropbox.isAuthenticated() && menu() }
+        { openCreateMenu && newFileMenu() }
+        { showError && showErrorMenu() }
+      </CardMenu>
+      <CardContent>
+        {!dropbox.isAuthenticated()
+          && <Button as="a" href={authURL}>Authenticate with Dropbox</Button>}
+        { showSpinner && <Spinner></Spinner>}
+        <FileList>
+          {dropboxFiles?.map((entry: any) => (
+            <FileItem as="a" href={'/d' + entry.path_lower}>{entry.path_display}</FileItem>
+          ))}
+        </FileList>
+      </CardContent>
+    </CardContainer>
   );
 }
