@@ -3,10 +3,10 @@ import styled from 'styled-components';
 
 const backgroundColor = '#0f0b0f';
 const fontColor = '#f1f1f1';
-const headerColor = '#b4838d';
+const headerColor = "#d57264"; // #b4838d
 
 const containerColor = "#242323";
-const menuColor = "#6c6774";
+const menuColor = "#504441"; //"#6c6774";
 
 const colorEditorLink = "#fffbfe";
 const btnColor = "#a8bfd7";
@@ -50,7 +50,7 @@ export const Header = styled.h2`
 	font-size: 42pt;
 
 	@media (max-width: 750px) {
-		font-size: 72pt;	
+		font-size: 36pt;	
 	}
 `;
 
@@ -85,16 +85,7 @@ export const EditorContent = styled.div`
 
 export const EditorHeader = styled.div`
 	display: flex;
-	align-items: baseline;
-	background-color: ${headerColor};
-	
-	& > * {
-		margin: 10px;
-	}
-
-	& > a {
-		
-	}
+	background-color: ${menuColor};
 
 	@media (max-width: 750px) {
 			font-size: 14pt;
@@ -104,6 +95,7 @@ export const EditorHeader = styled.div`
 export const EditorFilename = styled.h3`
 	font-family: ${fontMonospace};
 	font-weight: 400;
+	padding: 0 10px;
 `;
 
 export const EditorLink = styled.div`
@@ -170,23 +162,14 @@ export const MenuList = styled.ul`
 	flex-direction: row;
 	width: 100%;
 
+	align-items: baseline;
+
 	& > li:last-child {
 		margin-left: auto;
 	}
 `;
 
 export const MenuItem = styled.li`
-	display: flex;
-	flex-direction: row;
-	align-content: stretch;
-
-	& > input {
-		flex-basis: auto;
-	}
-
-	& > button {
-		flex-basis: 100px;
-	}
 `;
 
 export const FileList = styled.ul`
@@ -213,8 +196,14 @@ export const FileItem = styled.li`
 `;
 
 export const CardContainer = styled.div`
+	width: 100%;
 	background-color: ${containerColor};
-	margin-top: 13px;
+
+	max-width: 700px;
+	margin: 13px auto;
+
+	@media (max-width: 750px) {
+	}
 `;
 
 export const CardTitle = styled.div`
