@@ -15,7 +15,7 @@
     "@types/react-router-dom": "^5.1.5",
     "@types/styled-components": "^5.1.2",
     "@types/uuid": "^8.3.0",
-    "codemirror": "^5.56.0",
+    "codemirror": "^5.63.1",
     "crypto-js": "^4.0.0",
     "dropbox": "^5.2.1",
     "fontsource-roboto": "^3.0.3",
