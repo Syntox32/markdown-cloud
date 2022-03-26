@@ -27,13 +27,16 @@
     "react-scripts": "3.4.1",
     "styled-components": "^5.1.1",
     "typescript": "~3.7.2",
-    "uuid": "^8.3.0"
+    "uuid": "^8.3.0",
+    "@snyk/protect": "latest"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "prepare": "yarn run snyk-protect",
+    "snyk-protect": "snyk-protect"
   },
   "eslintConfig": {
     "extends": "react-app",
@@ -50,5 +53,6 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "snyk": true
 }
